@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/version-0.0.4-blue.svg) ![Kubernetes](https://img.shields.io/badge/kubernetes-1.14+-green.svg)
 
-**Readiness Controller** is a lightweight Kubernetes operator that implements **Global Dependency Gating**.
+**Readiness Controller** is a lightweight Kubernetes controller that implements **Global Dependency Gating**.
 
 It centralizes health checking for shared resources (Databases, External APIs) and controls traffic to your application Pods using native [Kubernetes Readiness Gates](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-readiness-gate).
 
