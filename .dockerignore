@@ -1,0 +1,34 @@
+# Version Control
+.git
+.gitignore
+
+# Helm Charts (Not needed inside the container image)
+charts/
+
+# Build Artifacts & Local Binaries
+bin/
+*.exe
+*.out
+*.test
+
+# Docker related
+Dockerfile
+.dockerignore
+
+# IDE & Editor Configs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+# Documentation
+README.md
+docs/
+
+# Go Dependencies (We handle this via go.mod in the build stage)
+vendor/
+
+# Temporary files
+tmp/
+*.log

@@ -19,7 +19,7 @@ charts/**/charts/
 # Helm temporary files
 charts/**/tmp/
 # --- Docker ---
-.dockerignore
+# .dockerignore
 
 # # --- IDEs & Editors ---
 # # VS Code
