@@ -61,7 +61,7 @@ For the controller to protect your application, you must explicitly inject the *
 
 1.  Open your application's `deployment.yaml`.
 2.  Add the `readinessGates` block under `spec.template.spec`.
-3.  Ensure the `conditionType` matches exactly what you defined in the controller config.
+3.  Ensure the `conditionType` matches exactly what you defined in the controller config values gates section . ```{{ .Values.Gates.gateName }} ```
 
 ```yaml
 apiVersion: apps/v1
