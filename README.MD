@@ -1,6 +1,7 @@
 # Readiness Controller
 
 ![Version](https://img.shields.io/badge/version-0.0.4-blue.svg) ![Kubernetes](https://img.shields.io/badge/kubernetes-1.14+-green.svg)
+[![CI](https://github.com/EladAviczer/readiness-controller/actions/workflows/ci.yaml/badge.svg)](https://github.com/EladAviczer/readiness-controller/actions/workflows/ci.yaml)
 
 **Readiness Controller** is a lightweight Kubernetes controller that implements **Global Dependency Gating**.
 
