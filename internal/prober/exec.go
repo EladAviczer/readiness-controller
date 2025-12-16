@@ -11,7 +11,6 @@ type ExecProber struct {
 }
 
 func NewExecProber(cmdStr string) *ExecProber {
-	// Simple space splitting. For complex scripts, wrap in a .sh file.
 	parts := strings.Fields(cmdStr)
 	return &ExecProber{Command: parts}
 }

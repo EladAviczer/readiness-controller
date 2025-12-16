@@ -9,7 +9,6 @@ import (
 	"time"
 )
 
-// GateStatus holds the state of a single rule
 type GateStatus struct {
 	Name      string
 	Target    string
@@ -19,13 +18,11 @@ type GateStatus struct {
 	Message   string
 }
 
-// Global state map (Key = Rule Name)
 var (
 	stateStore = make(map[string]GateStatus)
 	mu         sync.RWMutex
 )
 
-// UpdateState is called by each controller routine
 func UpdateState(ruleName, target, checkType string, healthy bool) {
 	mu.Lock()
 	defer mu.Unlock()
@@ -45,7 +42,6 @@ func UpdateState(ruleName, target, checkType string, healthy bool) {
 	}
 }
 
-// HTML Template for Multi-Gate Dashboard
 const htmlTmpl = `
 <!DOCTYPE html>
 <html>
@@ -90,24 +86,31 @@ const htmlTmpl = `
 </html>
 `
 
+var tmpl = template.Must(template.New("webpage").Parse(htmlTmpl))
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	mu.RLock()
-	// Convert map to slice for the template
 	var list []GateStatus
 	for _, v := range stateStore {
 		list = append(list, v)
 	}
 	mu.RUnlock()
 
-	// Sort by name for consistent display
 	sort.Slice(list, func(i, j int) bool { return list[i].Name < list[j].Name })
 
-	t, _ := template.New("webpage").Parse(htmlTmpl)
-	t.Execute(w, list)
+	if err := tmpl.Execute(w, list); err != nil {
+		log.Printf("Error rendering UI template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
 }
 
 func Start(port string) {
 	http.HandleFunc("/", handler)
 	log.Printf("UI Server started on port %s", port)
-	go http.ListenAndServe(":"+port, nil)
+
+	go func() {
+		if err := http.ListenAndServe(":"+port, nil); err != nil {
+			log.Fatalf("UI Server failed to start: %v", err)
+		}
+	}()
 }

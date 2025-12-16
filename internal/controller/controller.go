@@ -21,7 +21,6 @@ type ReadinessController struct {
 	probe  prober.Prober
 }
 
-// New creates a controller for a specific rule
 func New(client *kubernetes.Clientset, rule config.GateRule, p prober.Prober) *ReadinessController {
 	return &ReadinessController{client: client, rule: rule, probe: p}
 }
@@ -33,7 +32,7 @@ func (c *ReadinessController) Start(ctx context.Context) {
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
-	c.reconcile(ctx) // Immediate run
+	c.reconcile(ctx)
 
 	for {
 		select {
@@ -48,7 +47,6 @@ func (c *ReadinessController) Start(ctx context.Context) {
 func (c *ReadinessController) reconcile(ctx context.Context) {
 	isHealthy := c.probe.Check()
 
-	// Update the global UI state
 	ui.UpdateState(c.rule.Name, c.rule.CheckTarget, c.rule.CheckType, isHealthy)
 
 	targetStatus := corev1.ConditionFalse
@@ -56,7 +54,6 @@ func (c *ReadinessController) reconcile(ctx context.Context) {
 		targetStatus = corev1.ConditionTrue
 	}
 
-	// Use rule-specific namespace and label
 	pods, err := c.client.CoreV1().Pods(c.rule.Namespace).List(ctx, metav1.ListOptions{
 		LabelSelector: c.rule.TargetLabel,
 	})
@@ -71,7 +68,6 @@ func (c *ReadinessController) reconcile(ctx context.Context) {
 }
 
 func (c *ReadinessController) ensurePodGate(ctx context.Context, pod *corev1.Pod, status corev1.ConditionStatus) {
-	// Optimization: Skip if correct
 	if isGateAlreadySet(pod, c.rule.GateName, status) {
 		return
 	}
@@ -93,7 +89,6 @@ func (c *ReadinessController) ensurePodGate(ctx context.Context, pod *corev1.Pod
 	}
 }
 
-// --- Helpers ---
 func updateCondition(pod *corev1.Pod, gateName string, status corev1.ConditionStatus) {
 	for i, c := range pod.Status.Conditions {
 		if c.Type == corev1.PodConditionType(gateName) {
