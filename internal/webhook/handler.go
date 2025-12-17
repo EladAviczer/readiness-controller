@@ -63,7 +63,6 @@ func HandleMutate(w http.ResponseWriter, r *http.Request) {
 	if _, err := w.Write(respBytes); err != nil {
 		log.Printf("Failed to write admission response: %v", err)
 	}
-	w.Write(respBytes)
 }
 
 func processAdmissionReview(ar admissionv1.AdmissionReview) *admissionv1.AdmissionResponse {

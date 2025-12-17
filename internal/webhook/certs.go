@@ -85,9 +85,8 @@ func encodePEM(typeStr string, content []byte) []byte {
 
 	var out bytes.Buffer
 	if err := pem.Encode(&out, b); err != nil {
-		// In the unlikely event of an OOM or buffer error, return nil or empty
 		return nil
 	}
-	pem.Encode(&out, b)
+
 	return out.Bytes()
 }
