@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: eladavi/readiness-controller
   pullPolicy: Always
-  tag: "0.0.4"
+  tag: "0.0.6"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -23,7 +23,7 @@ gates:
     targetLabel: "app=donnie"
     namespace: "default"
     checkType: "http"
-    checkTarget: "https://google.com/zokolo"
+    checkTarget: "https://google.com/zokoboko"
     interval: "10s"
 
   # Example TCP check

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: donnie-app
+  labels:
+    app: donnie
+    readiness-controller.io/inject: "google"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: donnie
+  template:
+    metadata:
+      labels:
+        app: donnie
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
