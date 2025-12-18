@@ -1,12 +1,17 @@
-name: CI
+name: CI/CD
 
 on:
   push:
     branches: [ "main" ]
+    # Trigger on version tags (e.g., v1.0.0)
+    tags: [ 'v*' ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
+  # ------------------------------------------------------------------
+  # JOB 1: GO TESTS & LINTING (Unchanged)
+  # ------------------------------------------------------------------
   go-quality:
     name: Go Test & Lint
     runs-on: ubuntu-latest
@@ -31,25 +36,9 @@ jobs:
           version: latest
           args: --timeout=5m
 
-  docker-build:
-    name: Docker Build Check
-    runs-on: ubuntu-latest
-    needs: [go-quality]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker Image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: false
-          tags: readiness-controller:test
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
+  # ------------------------------------------------------------------
+  # JOB 2: HELM LINTING (Unchanged)
+  # ------------------------------------------------------------------
   helm-lint:
     name: Helm Chart Check
     runs-on: ubuntu-latest
@@ -63,3 +52,56 @@ jobs:
 
       - name: Lint Chart
         run: helm lint charts/readiness-controller
+
+  # ------------------------------------------------------------------
+  # JOB 3: DOCKER BUILD & PUBLISH (Upgraded)
+  # ------------------------------------------------------------------
+  docker-publish:
+    name: Docker Build & Push
+    runs-on: ubuntu-latest
+    needs: [go-quality] # Wait for tests to pass
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 1. Login to Docker Hub 
+      # Only runs if this is NOT a Pull Request (Main branch or Tag)
+      - name: Login to Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 2. Generate Tags (latest, sha, semver)
+      - name: Docker Meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: eladavi/readiness-controller
+          tags: |
+            # Tag: "latest" (Only on main branch)
+            type=raw,value=latest,enable={{is_default_branch}}
+            # Tag: "sha-abc1234" (Always)
+            type=sha,format=short
+            # Tag: "1.2.3" and "latest" behavior for tags (On git tag v1.2.3)
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      # 3. Build & Push
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          # Push only if not a PR
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
