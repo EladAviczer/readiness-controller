@@ -4,7 +4,6 @@
   "properties": {
     "fullnameOverride": {
       "default": "",
-      "required": [],
       "title": "fullnameOverride",
       "type": "string"
     },
@@ -16,44 +15,37 @@
             "additionalProperties": false,
             "properties": {
               "checkTarget": {
-                "default": "https://google.com/zokolo",
-                "required": [],
+                "default": "https://google.com/zokoboko",
                 "title": "checkTarget",
                 "type": "string"
               },
               "checkType": {
                 "default": "http",
-                "required": [],
                 "title": "checkType",
                 "type": "string"
               },
               "gateName": {
                 "default": "controller.rc/google",
-                "required": [],
                 "title": "gateName",
                 "type": "string"
               },
               "interval": {
                 "default": "10s",
-                "required": [],
                 "title": "interval",
                 "type": "string"
               },
               "name": {
                 "default": "google-check",
-                "required": [],
                 "title": "name",
                 "type": "string"
               },
               "namespace": {
                 "default": "default",
-                "required": [],
                 "title": "namespace",
                 "type": "string"
               },
               "targetLabel": {
                 "default": "app=donnie",
-                "required": [],
                 "title": "targetLabel",
                 "type": "string"
               }
@@ -72,7 +64,6 @@
         ],
         "required": []
       },
-      "required": [],
       "title": "gates",
       "type": "array"
     },
@@ -87,19 +78,16 @@
       "properties": {
         "pullPolicy": {
           "default": "Always",
-          "required": [],
           "title": "pullPolicy",
           "type": "string"
         },
         "repository": {
           "default": "eladavi/readiness-controller",
-          "required": [],
           "title": "repository",
           "type": "string"
         },
         "tag": {
-          "default": "0.0.4",
-          "required": [],
+          "default": "0.0.6",
           "title": "tag",
           "type": "string"
         }
@@ -116,19 +104,16 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "nameOverride": {
       "default": "",
-      "required": [],
       "title": "nameOverride",
       "type": "string"
     },
     "replicaCount": {
       "default": 1,
-      "required": [],
       "title": "replicaCount",
       "type": "integer"
     },
@@ -140,13 +125,11 @@
           "properties": {
             "cpu": {
               "default": "100m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "128Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -163,13 +146,11 @@
           "properties": {
             "cpu": {
               "default": "50m",
-              "required": [],
               "title": "cpu",
               "type": "string"
             },
             "memory": {
               "default": "64Mi",
-              "required": [],
               "title": "memory",
               "type": "string"
             }
@@ -194,19 +175,16 @@
       "properties": {
         "port": {
           "default": 80,
-          "required": [],
           "title": "port",
           "type": "integer"
         },
         "targetPort": {
           "default": 8080,
-          "required": [],
           "title": "targetPort",
           "type": "integer"
         },
         "type": {
           "default": "ClusterIP",
-          "required": [],
           "title": "type",
           "type": "string"
         }
@@ -230,13 +208,11 @@
         },
         "create": {
           "default": true,
-          "required": [],
           "title": "create",
           "type": "boolean"
         },
         "name": {
           "default": "",
-          "required": [],
           "title": "name",
           "type": "string"
         }

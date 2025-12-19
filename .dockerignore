@@ -4,7 +4,7 @@
 
 # Helm Charts (Not needed inside the container image)
 charts/
-
+samples/
 # Build Artifacts & Local Binaries
 bin/
 *.exe

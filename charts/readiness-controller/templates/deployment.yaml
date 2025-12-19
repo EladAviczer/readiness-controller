@@ -31,9 +31,14 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+            - name: webhook
+              containerPort: 8443
+              protocol: TCP
           env:
             - name: CONFIG_PATH
               value: "/etc/config/gates.json"
+            - name: WEBHOOK_SERVICE_NAME
+              value: {{ include "readiness-controller.fullname" . }}
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config
