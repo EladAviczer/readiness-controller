@@ -11,21 +11,21 @@
 
 Stop writing custom scripts, sidecars, or cronjobs just to check if "Site A" is up or "Service B" is reachable. Define your probes declaratively and let the operator handle the rest.
 
-## 🚀 Why Use It?
+## Why Use It?
 
 *   **Simple Configuration**: Define your checks in standard YAML. No code required.
 *   **Versatile**: Check internal services, external APIs, databases, or run custom scripts.
 *   **Unified Visibility**: Get a consistent view of all your probes via Kubernetes CRDs, Prometheus Metrics, and Grafana.
 *   **Zero Overhead**: A single operator manages hundreds of probes efficiently.
 
-## ✨ Features
+## Features
 
 *   **HTTP/HTTPS**: Check status codes, response times.
 *   **TCP**: Check port connectivity (Databases, Queues).
 *   **Prometheus**: Native metrics (`probe_success`, `probe_duration_seconds`) on port `9090`.
 *   **Grafana**: Includes a ready-to-use dashboard.
 
-## 🛠️ Quick Start
+## Quick Start
 
 ### 1. Install
 ```bash
@@ -71,7 +71,7 @@ check-payment-api  false     503 Unavailable 2m
 **Visualize in Grafana:**
 Import the included `dashboards/grafana-dashboard.json` to see Success Rates, Latency, and Status History instantly.
 
-## 🧩 How It Works
+## How It Works
 1.  You define a **Probe**.
 2.  The **Operator** executes the check (HTTP, TCP, etc.) on the defined interval.
 3.  The results are immediately available in:
