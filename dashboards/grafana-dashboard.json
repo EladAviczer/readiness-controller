@@ -383,7 +383,7 @@
   "refresh": "",
   "schemaVersion": 39,
   "tags": [
-    "probe-operator",
+    "heartbeat-operator",
     "k8s"
   ],
   "templating": {
@@ -409,8 +409,8 @@
       {
         "current": {
           "selected": false,
-          "text": "rc-probe-operator",
-          "value": "rc-probe-operator"
+          "text": "rc-heartbeat-operator",
+          "value": "rc-heartbeat-operator"
         },
         "hide": 1,
         "includeAll": false,
@@ -420,11 +420,11 @@
         "options": [
           {
             "selected": true,
-            "text": "rc-probe-operator",
-            "value": "rc-probe-operator"
+            "text": "rc-heartbeat-operator",
+            "value": "rc-heartbeat-operator"
           }
         ],
-        "query": "rc-probe-operator",
+        "query": "rc-heartbeat-operator",
         "skipUrlSync": false,
         "type": "custom"
       }
@@ -436,8 +436,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Probe Operator Dashboard",
-  "uid": "probe-operator-v1",
+  "title": "Heartbeat Operator Dashboard",
+  "uid": "heartbeat-operator-v1",
   "version": 5,
   "weekStart": ""
 }

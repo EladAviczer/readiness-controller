@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "probe-operator.fullname" . }}
+  name: {{ include "heartbeat-operator.fullname" . }}
   labels:
-    {{- include "probe-operator.labels" . | nindent 4 }}
+    {{- include "heartbeat-operator.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      {{- include "probe-operator.selectorLabels" . | nindent 6 }}
+      {{- include "heartbeat-operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
-        {{- include "probe-operator.selectorLabels" . | nindent 8 }}
+        {{- include "heartbeat-operator.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "probe-operator.serviceAccountName" . }}
+      serviceAccountName: {{ include "heartbeat-operator.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -49,4 +49,4 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: {{ include "probe-operator.fullname" . }}-config
+            name: {{ include "heartbeat-operator.fullname" . }}-config

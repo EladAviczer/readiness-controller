@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "probe-operator.fullname" . }}
+  name: {{ include "heartbeat-operator.fullname" . }}
   labels:
-    {{- include "probe-operator.labels" . | nindent 4 }}
+    {{- include "heartbeat-operator.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -18,4 +18,4 @@ spec:
       name: metrics
     {{- end }}
   selector:
-    {{- include "probe-operator.selectorLabels" . | nindent 4 }}
+    {{- include "heartbeat-operator.selectorLabels" . | nindent 4 }}

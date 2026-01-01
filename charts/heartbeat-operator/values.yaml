@@ -1,0 +1,82 @@
+replicaCount: 1
+
+image:
+  repository: eladavi/heartbeat-operator
+  pullPolicy: Always
+  tag: "localbuild_0.0.12"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+# --- PROBE CONFIGURATION ---
+probes:
+  - name: "google-check"
+    namespace: "default"
+    checkType: "http"
+    checkTarget: "https://google.com/zokolo"
+    interval: "60s"
+  # --- Public Successes (Green) ---
+  - name: "public-google-dns"
+    namespace: "default"
+    checkType: "tcp"
+    checkTarget: "8.8.8.8:53"
+    interval: "10s"
+  - name: "public-github-api"
+    namespace: "default"
+    checkType: "http"
+    checkTarget: "https://api.github.com"
+    interval: "15s"
+  # --- Internal Successes (Green) ---
+  # Assuming standard k8s services, these might fail locally but look good if they exist
+  # Using reliable local targets if possible
+  - name: "internal-kubernetes-api"
+    namespace: "default"
+    checkType: "tcp"
+    checkTarget: "kubernetes.default:443"
+    interval: "5s"
+  # --- Failures (Red) ---
+  - name: "broken-legacy-api"
+    namespace: "default"
+    checkType: "http"
+    checkTarget: "http://non-existent-service.local/health"
+    interval: "8s"
+  - name: "database-replica-03"
+    namespace: "default"
+    checkType: "tcp"
+    checkTarget: "127.0.0.1:9999" # Connection refused
+    interval: "5s"
+
+  # Example TCP check
+  # - name: "redis-check"
+  #   namespace: "default"
+  #   checkType: "tcp"
+  #   checkTarget: "redis-master:6379"
+  #   interval: "5s"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+metrics:
+  enabled: true
+  port: 9090
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    labels:
+      prometheus: apps

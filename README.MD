@@ -1,11 +1,11 @@
-# Probe Operator
+# Heartbeat Operator
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue.svg) ![Kubernetes](https://img.shields.io/badge/kubernetes-1.19+-green.svg)
 [![CI](https://github.com/EladAviczer/readiness-controller/actions/workflows/ci.yaml/badge.svg)](https://github.com/EladAviczer/readiness-controller/actions/workflows/ci.yaml)
 
 > **Effortless Probing for Kubernetes.**
 
-**Probe Operator** is the easiest way to configure and run health checks, reachability tests, and data validation probes in your Kubernetes cluster.
+**Heartbeat Operator** is the easiest way to configure and run health checks, reachability tests, and data validation probes in your Kubernetes cluster.
 
 Stop writing custom scripts, sidecars, or cronjobs just to check if "Site A" is up or "Service B" is reachable. Define your probes declaratively and let the operator handle the rest.
 

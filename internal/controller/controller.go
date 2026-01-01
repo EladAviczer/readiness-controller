@@ -5,11 +5,11 @@ import (
 	"log"
 	"time"
 
-	"probe-operator/api/v1alpha1"
-	"probe-operator/internal/config"
-	"probe-operator/internal/metrics"
-	"probe-operator/internal/prober"
-	"probe-operator/internal/ui"
+	"heartbeat-operator/api/v1alpha1"
+	"heartbeat-operator/internal/config"
+	"heartbeat-operator/internal/metrics"
+	"heartbeat-operator/internal/prober"
+	"heartbeat-operator/internal/ui"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"

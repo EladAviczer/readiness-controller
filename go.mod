@@ -1,4 +1,4 @@
-module probe-operator
+module heartbeat-operator
 
 go 1.24.2
 

@@ -2,10 +2,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "probe-operator.fullname" . }}
+  name: {{ include "heartbeat-operator.fullname" . }}
   namespace: {{ .Values.metrics.serviceMonitor.namespace }}
   labels:
-    {{- include "probe-operator.labels" . | nindent 4 }}
+    {{- include "heartbeat-operator.labels" . | nindent 4 }}
     {{- if .Values.metrics.serviceMonitor.labels }}
     {{- toYaml .Values.metrics.serviceMonitor.labels | nindent 4 }}
     {{- end }}
@@ -15,7 +15,7 @@ spec:
     - {{ .Release.Namespace }}
   selector:
     matchLabels:
-      {{- include "probe-operator.selectorLabels" . | nindent 6 }}
+      {{- include "heartbeat-operator.selectorLabels" . | nindent 6 }}
   endpoints:
     - port: metrics
       path: /metrics

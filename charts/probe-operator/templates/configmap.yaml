@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ include "probe-operator.fullname" . }}-config
-  labels:
-    {{- include "probe-operator.labels" . | nindent 4 }}
-data:
-  gates.json: |
-    {{- .Values.probes | toJson | nindent 4 }}

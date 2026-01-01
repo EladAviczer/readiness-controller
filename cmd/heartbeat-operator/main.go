@@ -9,10 +9,10 @@ import (
 	"sync"
 	"syscall"
 
-	"probe-operator/internal/config"
-	"probe-operator/internal/controller"
-	"probe-operator/internal/prober"
-	"probe-operator/internal/ui"
+	"heartbeat-operator/internal/config"
+	"heartbeat-operator/internal/controller"
+	"heartbeat-operator/internal/prober"
+	"heartbeat-operator/internal/ui"
 
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes"
