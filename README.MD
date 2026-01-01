@@ -5,6 +5,8 @@
 
 > **Effortless Probing for Kubernetes.**
 
+![Grafana Dashboard](images/Screenshot%20from%202026-01-01%2015-31-39.png "Grafana Dashboard")
+
 **Heartbeat Operator** is the easiest way to configure and run health checks, reachability tests, and data validation probes in your Kubernetes cluster.
 
 Stop writing custom scripts, sidecars, or cronjobs just to check if "Site A" is up or "Service B" is reachable. Define your probes declaratively and let the operator handle the rest.

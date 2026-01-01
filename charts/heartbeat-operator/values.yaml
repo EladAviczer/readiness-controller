@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: eladavi/heartbeat-operator
   pullPolicy: Always
-  tag: "localbuild_0.0.12"
+  tag: "sha-d7f36c4"
 
 imagePullSecrets: []
 nameOverride: ""

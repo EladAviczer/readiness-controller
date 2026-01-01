@@ -22,7 +22,7 @@
           "type": "string"
         },
         "repository": {
-          "default": "eladavi/probe-operator",
+          "default": "eladavi/heartbeat-operator",
           "title": "repository",
           "type": "string"
         },
@@ -135,6 +135,196 @@
               },
               "name": {
                 "default": "google-check",
+                "title": "name",
+                "type": "string"
+              },
+              "namespace": {
+                "default": "default",
+                "title": "namespace",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "namespace",
+              "checkType",
+              "checkTarget",
+              "interval"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "checkTarget": {
+                "default": "8.8.8.8:53",
+                "title": "checkTarget",
+                "type": "string"
+              },
+              "checkType": {
+                "default": "tcp",
+                "title": "checkType",
+                "type": "string"
+              },
+              "interval": {
+                "default": "10s",
+                "title": "interval",
+                "type": "string"
+              },
+              "name": {
+                "default": "public-google-dns",
+                "title": "name",
+                "type": "string"
+              },
+              "namespace": {
+                "default": "default",
+                "title": "namespace",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "namespace",
+              "checkType",
+              "checkTarget",
+              "interval"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "checkTarget": {
+                "default": "https://api.github.com",
+                "title": "checkTarget",
+                "type": "string"
+              },
+              "checkType": {
+                "default": "http",
+                "title": "checkType",
+                "type": "string"
+              },
+              "interval": {
+                "default": "15s",
+                "title": "interval",
+                "type": "string"
+              },
+              "name": {
+                "default": "public-github-api",
+                "title": "name",
+                "type": "string"
+              },
+              "namespace": {
+                "default": "default",
+                "title": "namespace",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "namespace",
+              "checkType",
+              "checkTarget",
+              "interval"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "checkTarget": {
+                "default": "kubernetes.default:443",
+                "title": "checkTarget",
+                "type": "string"
+              },
+              "checkType": {
+                "default": "tcp",
+                "title": "checkType",
+                "type": "string"
+              },
+              "interval": {
+                "default": "5s",
+                "title": "interval",
+                "type": "string"
+              },
+              "name": {
+                "default": "internal-kubernetes-api",
+                "title": "name",
+                "type": "string"
+              },
+              "namespace": {
+                "default": "default",
+                "title": "namespace",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "namespace",
+              "checkType",
+              "checkTarget",
+              "interval"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "checkTarget": {
+                "default": "http://non-existent-service.local/health",
+                "title": "checkTarget",
+                "type": "string"
+              },
+              "checkType": {
+                "default": "http",
+                "title": "checkType",
+                "type": "string"
+              },
+              "interval": {
+                "default": "8s",
+                "title": "interval",
+                "type": "string"
+              },
+              "name": {
+                "default": "broken-legacy-api",
+                "title": "name",
+                "type": "string"
+              },
+              "namespace": {
+                "default": "default",
+                "title": "namespace",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "namespace",
+              "checkType",
+              "checkTarget",
+              "interval"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "checkTarget": {
+                "default": "127.0.0.1:9999",
+                "title": "checkTarget",
+                "type": "string"
+              },
+              "checkType": {
+                "default": "tcp",
+                "title": "checkType",
+                "type": "string"
+              },
+              "interval": {
+                "default": "5s",
+                "title": "interval",
+                "type": "string"
+              },
+              "name": {
+                "default": "database-replica-03",
                 "title": "name",
                 "type": "string"
               },
